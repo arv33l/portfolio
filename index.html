@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magdalena Malinger – protfolio</title>
+<meta name="description" content="Portfolio: aplikacje mobilne, C#, C++, Godot, SQL, animacje i strony internetowe.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1f6ee; --card:#fafdf8; --ink:#12241a; --mute:#566b5d;
+  --g:#1b8a4b; --gd:#0e4a29; --tint:#dfebdb; --line:#c9d9c4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:"Instrument Sans",system-ui,sans-serif;font-size:17px;line-height:1.65;color:var(--ink);background:var(--bg)}
+a{color:inherit}
+img,video{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--g);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,100% - 48px);margin-inline:auto}
+
+/* ---------- nagłówek ---------- */
+header{position:sticky;top:0;z-index:20;background:rgba(241,246,238,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:32px;height:64px}
+.brand{font-weight:700;text-decoration:none;letter-spacing:-.01em;margin-right:auto}
+nav{display:flex;gap:26px;font-size:.95rem}
+nav a{text-decoration:none;color:var(--mute);padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+nav a:hover{color:var(--ink)}
+nav a.on{color:var(--ink);border-color:var(--g)}
+.lang{font-size:.9rem;color:var(--mute)}
+.lang button{font:inherit;background:none;border:0;color:inherit;cursor:pointer;padding:4px 5px}
+.lang button.on{color:var(--ink);font-weight:700}
+@supports (animation-timeline:scroll()){
+  header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:var(--g);transform-origin:left;
+    animation:prog linear;animation-timeline:scroll(root)}
+  @keyframes prog{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:calc(100svh - 64px);display:flex;align-items:center;overflow:hidden}
+#dots{position:absolute;inset:0;width:100%;height:100%;-webkit-mask-image:linear-gradient(90deg,transparent 25%,#000 80%);mask-image:linear-gradient(90deg,transparent 25%,#000 80%)}
+.hero .wrap{position:relative;padding:70px 0 120px}
+h1{font-size:clamp(2.9rem,8vw,6.6rem);line-height:.96;letter-spacing:-.04em;font-weight:650;max-width:13ch;
+  animation:settle 1.3s cubic-bezier(.2,.7,.2,1) both}
+@keyframes settle{from{font-stretch:75%;font-weight:400;letter-spacing:.01em;opacity:0}to{font-stretch:100%;font-weight:650;letter-spacing:-.04em;opacity:1}}
+.hero p.sub{max-width:46ch;margin:28px 0 34px;font-size:1.15rem;color:var(--mute)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-block;padding:12px 22px;border-radius:10px;background:var(--g);color:#fff;font:inherit;font-weight:600;font-size:.97rem;text-decoration:none;border:1px solid var(--g);cursor:pointer;transition:background .2s,transform .2s}
+.btn:hover{background:var(--gd);border-color:var(--gd)}
+.btn:active{transform:scale(.98)}
+.btn.ghost{background:transparent;color:inherit;border-color:currentColor}
+.btn.ghost:hover{background:rgba(27,138,75,.12)}
+.facts{position:absolute;left:0;right:0;bottom:0;border-top:1px solid var(--line);background:rgba(241,246,238,.75);backdrop-filter:blur(6px)}
+.facts .wrap{padding:0;display:flex;flex-wrap:wrap}
+.facts div{flex:1 1 200px;padding:18px 0}
+.facts b{display:block;font-size:1.25rem;letter-spacing:-.01em}
+.facts span{font-size:.88rem;color:var(--mute)}
+
+/* ---------- sekcje ---------- */
+section{padding:110px 0 20px}
+h2{font-size:clamp(1.9rem,3.6vw,2.8rem);letter-spacing:-.03em;line-height:1.1;font-weight:650;margin-bottom:14px}
+.lead{color:var(--mute);max-width:56ch;margin-bottom:44px}
+.about{display:grid;grid-template-columns:1.5fr 1fr;gap:64px;align-items:start}
+.about p{max-width:58ch}.about p+p{margin-top:16px}
+.photo{aspect-ratio:4/5;border-radius:18px;background:var(--tint);display:grid;place-items:center;text-align:center;color:var(--mute);font-size:.9rem;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+.skills{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.skills h3{font-size:1rem;margin-bottom:6px}
+.skills li{list-style:none;display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-top:1px solid var(--line)}
+.skills li span{color:var(--mute);font-size:.9rem}
+
+/* ---------- projekty: karty nakładają się przy przewijaniu ---------- */
+.stack{display:grid;gap:36px;padding-bottom:30px}
+.pcard{position:sticky;top:calc(88px + var(--i)*16px);display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;
+  padding:30px;border-radius:24px;background:var(--tint);border:1px solid var(--line);min-height:420px}
+.pcard:nth-child(3n+2){background:var(--card)}
+.pcard:nth-child(3n){background:var(--gd);color:#e6f3e2;border-color:var(--gd)}
+.pcard:nth-child(3n) .meta{color:#9dc7a9}
+.pcard:nth-child(3n) .btn{background:#e6f3e2;color:var(--gd);border-color:#e6f3e2}
+.pcard:nth-child(3n) .btn.ghost{background:transparent;color:#e6f3e2;border-color:#e6f3e2}
+.media{position:relative;aspect-ratio:16/9;border-radius:14px;background:rgba(27,138,75,.16);display:grid;place-items:center;text-align:center;
+  font-size:.88rem;color:var(--mute);overflow:hidden}
+.pcard:nth-child(3n) .media{color:#9dc7a9;background:rgba(255,255,255,.08)}
+.media video,.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.shots{display:flex;justify-content:center;gap:16px;align-items:center;min-height:340px}
+.shot{position:relative;height:330px;aspect-ratio:9/19;border-radius:20px;background:rgba(27,138,75,.16);display:grid;place-items:center;font-size:.82rem;color:var(--mute);overflow:hidden;text-align:center;padding:10px}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard h3{font-size:1.9rem;letter-spacing:-.03em;line-height:1.1;margin:4px 0 10px}
+.meta{font-size:.9rem;color:var(--mute)}
+.pcard p{margin-bottom:22px;max-width:44ch}
+
+/* ---------- animacje ---------- */
+.track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:20px;scrollbar-width:thin;scrollbar-color:var(--g) transparent}
+.slide{flex:0 0 min(500px,86%);scroll-snap-align:start}
+.slide .media{border-radius:16px;background:var(--tint)}
+.slide figcaption{padding:10px 2px;font-size:.95rem}
+.arrows{display:flex;gap:10px;margin-top:6px}
+.arrows button{width:46px;height:46px;border-radius:50%;border:1px solid var(--ink);background:none;cursor:pointer;display:grid;place-items:center;color:var(--ink);transition:background .2s,color .2s}
+.arrows button:hover{background:var(--ink);color:var(--bg)}
+.arrows svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- hobby / edukacja ---------- */
+.hobby{display:grid;grid-template-columns:repeat(3,1fr);gap:44px}
+.hobby div{border-top:2px solid var(--ink);padding-top:16px}
+.hobby h3{font-size:1.25rem;margin-bottom:6px}.hobby p{color:var(--mute)}
+.edu{display:grid;grid-template-columns:1fr 2fr;gap:64px}
+.edu li{list-style:none;display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-top:1px solid var(--line)}
+.edu time{color:var(--mute);font-size:.92rem}.edu b{display:block}.edu p{color:var(--mute)}
+
+/* ---------- kontakt ---------- */
+.mail{display:inline-block;font-size:clamp(1.7rem,5.6vw,4rem);letter-spacing:-.04em;font-weight:650;text-decoration:underline;text-decoration-color:var(--g);text-decoration-thickness:3px;text-underline-offset:8px;word-break:break-all;transition:color .2s}
+.mail:hover{color:var(--g)}
+.clist{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:34px}
+.clist a{text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:border-color .2s}
+.clist a:hover{border-color:var(--g)}
+.clist small{display:block;color:var(--mute);font-size:.82rem}
+footer{margin-top:100px;border-top:1px solid var(--line);padding:26px 0;font-size:.9rem;color:var(--mute)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+/* ---------- powiększenie zdjęcia (lightbox) ---------- */
+.img-zoom{position:relative;width:100%;height:100%;cursor:pointer;overflow:hidden;border-radius:inherit}
+.img-zoom img{width:100%;height:100%;object-fit:cover;filter:blur(2px) brightness(0.85);transition:filter .2s,transform .2s}
+.img-zoom:hover img{filter:blur(0px) brightness(0.95);transform:scale(1.02)}
+.zoom-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,0.2);transition:background .2s}
+.img-zoom:hover .zoom-icon{background:rgba(0,0,0,0.4)}
+.lightbox{padding:0;border:none;background:transparent;width:auto;height:auto;max-width:100vw;max-height:100vh;display:none;align-items:center;justify-content:center;overflow:hidden;outline:none}
+.lightbox[open]{display:flex}
+.lightbox::backdrop{background:rgba(0,0,0,0.85);backdrop-filter:blur(5px)}
+.lightbox img{width:100%;height:100%;max-width:95vw;max-height:95vh;display:block;object-fit:contain}
+
+@media(max-width:860px){
+  header .wrap{flex-wrap:wrap;height:auto;gap:4px 16px;padding:10px 0}
+  nav{order:3;width:100%;overflow-x:auto;gap:18px;padding-bottom:4px;white-space:nowrap}
+  .hero{min-height:auto}.hero .wrap{padding:50px 0 190px}
+  .about,.skills,.hobby,.edu,.pcard{grid-template-columns:1fr}
+  .about,.skills,.hobby,.edu{gap:34px}
+  .pcard{position:static;gap:24px;padding:20px;min-height:0}
+  .edu li{grid-template-columns:90px 1fr}
+  html{scroll-padding-top:110px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#top">Magdalena Malinger</a>
+    <nav>
+      <a href="#o-mnie" data-en="About">O mnie</a>
+      <a href="#projekty" data-en="Projects">Projekty</a>
+      <a href="#umiejetnosci" data-en="Skills">Umiejętności</a>
+      <a href="#hobby">Hobby</a>
+      <a href="#kontakt" data-en="Contact">Kontakt</a>
+    </nav>
+    <div class="lang"><button class="on" data-l="pl">PL</button>/<button data-l="en">EN</button></div>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 data-en="Hi, my name is Magda.">Cześć, mam na imię Magda.</h1>
+    <p class="sub" data-en="I'm a student at a technical school, programmer profile.">Jestem uczennicą technikum komunikacji im. Hipolita Cegielskiego z oddziałami dwujęzycznymi w Poznaniu na profilu technik programista.</p>
+    <div class="btns">
+      <a class="btn" href="#projekty" data-en="See projects">Zobacz projekty</a>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<section id="o-mnie"><div class="wrap">
+  <h2 data-en="About me">O mnie</h2>
+  <div class="about">
+    <div>
+      <!-- TU WPISZ SWÓJ TEKST -->
+      <p data-en="I've been interested in programming since elementary school, and now I'm expanding my knowledge in a technical high school. What I enjoy most is creating projects that I can share with others and that bring users a lot of fun. Currently, I'm focusing on developing my skills and learning new technologies to make my upcoming applications even more polished and engaging.">Programowaniem interesuję się już od szkoły podstawowej, a obecnie rozszerzam swoją wiedzę w technikum. Najbardziej lubię tworzenie projektów, którymi mogę dzielić się z innymi i które dostarczają użytkownikom mnóstwo świetnej zabawy. Aktualnie skupiam się na rozwijaniu swoich umiejętności i poznawaniu nowych technologii, aby moje kolejne aplikacje były jeszcze bardziej dopracowane i angażujące.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="projekty"><div class="wrap">
+  <h2 data-en="Projects">Projekty</h2>
+  <p class="lead" data-en="Things I made myself. Each one has a video or a file you can try.">Rzeczy, które zrobiłam sama. Przy każdej jest film albo plik do wypróbowania.</p>
+
+  <div class="stack">
+
+    <!-- APLIKACJA 1 -->
+    <article class="pcard" style="--i:0">
+      <div class="shots">
+        <div class="shot"><img src="img/ChemLab1.jpg" alt="ChemLab1"></div><div class="shot"><img src="img/ChemLab2.jpg" alt="ChemLab2"></div>
+      </div>
+      <div>
+        <span class="meta">Android, Java</span>
+        <h3>ChemLab</h3>
+        <p data-en="An application I was commissioned to make, designed to help chemistry students master chemical compounds and their colors for their final exams.">Aplikacja stworzona na zlecenie, która pomaga maturzystom w przystępny sposób opanować związki chemiczne i ich charakterystyczne barwy.</p>
+        <a class="btn" href="projects/chemlab.apk" download data-en="Download .apk">Pobierz .apk</a>
+      </div>
+    </article>
+
+    <!-- APLIKACJA 2 -->
+    <article class="pcard" style="--i:1">
+      <div class="shots">
+        <div class="shot"><img src="img/AutoClicker.jpg" alt="ChemLab1"></div><div class="shot"><video src="vids/AutoClicker.mp4" autoplay loop muted playsinline></video></div>
+      </div>
+      <div>
+        <span class="meta">Android, Java</span>
+        <h3>AutoClicker</h3>
+        <p data-en="An app made because all auto clickers were full of ads or locked behind paywalls.">Aplikacja AutoClicker stworzona, ponieważ każdy dostępny clicker był pełen reklam lub płatny.</p>
+        <a class="btn" href="projects/autoclicker.apk" download data-en="Download .apk">Pobierz .apk</a>
+      </div>
+    </article>
+
+    <!-- BAZA DANYCH -->
+    <article class="pcard" style="--i:2">
+      <div class="media">
+        <div class="img-zoom" onclick="document.getElementById('lightbox-2').showModal()">
+          <img src="img/base.png" alt="diagram ERD">
+          <div class="zoom-icon">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="meta">SQL, MariaDB</span>
+        <h3 data-en="Large relational database - school project">Rozbudowana baza danych - projekt szkolny</h3>
+        <p data-en="A comprehensive MySQL relational database designed for managing an aquatic ecosystem and fish breeding, populated with test data generated via Python scripts. The system enforces data integrity through advanced procedures, including capacity calculation functions and triggers that automate validation and e-mail generation.">Relacyjna baza danych MySQL przeznaczona do zarządzania ekosystemem wodnym i hodowlami ryb, zawierająca automatycznie wygenerowane skryptami w Pythonie dane testowe. System wspiera integralność danych za pomocą procedur, w tym funkcji obliczających limity pojemności oraz triggerów automatyzujących walidację i generowanie adresów e-mail.</p>
+        <div class="btns">
+          <a class="btn ghost" href="projects/rybobaza.sql" download data-en="View .sql">Zobacz .sql</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- GODOT -->
+    <article class="pcard" style="--i:3">
+      <div class="media"><span>film: media/godot.mp4</span>
+        <video src="vids/felekGame.mp4" autoplay loop muted playsinline></video></div>
+      <div>
+        <span class="meta">Godot, GDScript</span>
+        <h3 data-en="Game in Godot">Gra w Godocie</h3>
+        <p data-en="The game is a 2D platformer where a fish named Felek jumps between floating wooden platforms. The player's goal is to collect strawberries and avoid sharp spikes to score points.">Dwuwymiarowa platformówka, w której ryba o imieniu Felek skacze po wiszących w powietrzu platformach. Celem gracza jest zbieranie truskawek oraz unikanie kolców, aby zdobywać punkty.</p>
+      </div>
+    </article>
+
+    <!-- C# -->
+    <article class="pcard" style="--i:4">
+      <div class="media"><span>film: media/kalendarz.mp4</span>
+        <video src="vids/todo.mp4" autoplay loop muted playsinline></video></div>
+      <div>
+        <span class="meta">Python, Tkinter</span>
+        <h3 data-en="Desktop calendar">Kalendarz na komputer</h3>
+        <p data-en="Interactive task management and entertainment application that allows users to log in, handle schedules through a monthly calendar and task lists, and interact with a virtual pet. The entire project is designed using an object-oriented approach, splitting functionality into modular components with a cohesive graphical interface.">Interaktywna aplikacja w formie organizerowo-rozrywkowej, która umożliwia użytkownikom logowanie, zarządzanie zadaniami za pomocą kalendarza miesięcznego i list oraz interakcję z wirtualnym zwierzakiem. Całość została zaprojektowana w sposób obiektowy, dzieląc funkcjonalności na przejrzyste moduły z zachowaniem spójnego interfejsu graficznego.</p>
+      </div>
+    </article>
+
+    <!-- C++ -->
+    <article class="pcard" style="--i:5">
+      <div class="media"><span>film: media/labirynt.mp4</span>
+        <video src="vids/labyrinth.mp4" autoplay loop muted playsinline></video></div>
+      <div>
+        <span class="meta">C++, OpenGL</span>
+        <h3 data-en="3D maze">Labirynt 3D</h3>
+        <p data-en="The game is a 3D OpenGL maze where the corridor structure is automatically generated from a text file containing zeros and ones. The player's objective is to navigate from a first-person perspective through the generated path network until reaching the exit.">Gra jest trójwymiarowym labiryntem stworzonym w technologii OpenGL, w którym struktura korytarzy generowana jest automatycznie z pliku tekstowego zawierającego zera i jedynki. Zadaniem gracza jest nawigacja z perspektywy pierwszej osoby przez tak utworzoną sieć ścieżek aż do odnalezienia wyjścia.</p>
+        <div class="btns">
+        </div>
+      </div>
+    </article>
+  </div>
+</div></section>
+
+
+<section id="umiejetnosci"><div class="wrap">
+  <h2 data-en="Skills">Umiejętności</h2>
+  <div class="skills">
+    <div><h3 data-en="Languages">Języki</h3><ul>
+      <li>C#</li>
+      <li>C++</li>
+      <li>Python</li>
+      <li>SQL</li>
+    </ul></div>
+    <div><h3>Web</h3><ul>
+      <li>HTML, CSS</li>
+      <li>JavaScript</li>
+      <li>PHP</li>
+    </ul></div>
+    <div><h3 data-en="Tools">Narzędzia</h3><ul>
+      <li>Godot</li>
+      <li>OpenGL</li>
+      <li>Git, GitHub</li>
+      <li>Krita</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<section id="hobby"><div class="wrap">
+  <h2>Hobby</h2>
+  <p class="lead" data-en="What I do when I'm not coding.">Co robię, kiedy nie koduję.</p>
+  <div class="hobby">
+    <div><h3 data-en="Animation">Animacje</h3><p data-en="When I have free time and feel like it, I do digital drawing and animation. I work on a Huion graphics tablet, and my favorite program is Krita. I choose it for both drawing and animation.">Gdy mam wolniejszy czas i chęci, zajmuję się rysowaniem cyfrowym oraz animacją. Pracuję na tablecie graficznym Huion, a mój ulubiony program to Krita. Wybieram ją zarówno do rysowania jak i animacji.</p></div>
+    <div><h3 data-en="Games">Gry</h3><p data-en="Like almost every person involved in programming, I like to play games in my free time. My favorite titles are The Last of Us Part II, Detroit: Become Human, and The Witcher 3.">Jak prawie każda osoba, która zajmuje się programowaniem, w wolnych chwilach chętnie sięgam po gry. Moje ulubione tytuły to The Last of Us Part II, Detroit: Become Human oraz Wiedźmin 3.</p></div>
+    <div><h3>Hobby</h3><p data-en="Outside of technology itself, I am interested in artistic makeup, sewing, and overall cooking or baking. I enjoy spending time with a good book or simply creating something with my own hands.">Poza samą technologią, interesuje mnie makijaż artystyczny, szycie i ogólnie gotowanie czy pieczeniem. Z przyjemnością spędzam czas nad dobrą książką albo po prostu tworząc coś własnoręcznie.</p></div>
+  </div>
+</div></section>
+
+<section id="edukacja"><div class="wrap">
+  <div class="edu">
+    <h2 data-en="Education">Edukacja</h2>
+    <ul>
+      <li><time>[2023–2028]</time><div><b data-en="Technical school, programmer">Technikum, technik programista</b><p>Zespół Szkół Komunikacji im. Hipolita Cegielskiego, Poznań</p></div></li>
+      <li><time>[2026]</time><div><b data-en="INF.03 – 100% and 100%">INF.03 – 100%</b><p data-en="Creating and administering websites and databases.">Tworzenie i administrowanie stronami internetowymi i bazami danych.</p></div></li>
+    </ul>
+  </div>
+</div></section>
+
+<section id="kontakt"><div class="wrap">
+  <h2 data-en="Contact">Kontakt</h2>
+  <a class="mail" href="mailto:magdalena.malinger18@gmail.com">magdalena.malinger18@gmail.com</a>
+  <div class="clist">
+    <a href="tel:+48508486202"><small data-en="Phone">Telefon</small>+48 508 486 202</a>
+    <a href="https://github.com/arv33l" target="_blank" rel="noopener"><small>GitHub</small>@arv33l</a>
+  </div>
+</div></section>
+
+</main>
+
+<dialog id="lightbox-2" class="lightbox" onclick="this.close()">
+  <img src="img/base.png" alt="diagram ERD - powiększony">
+</dialog>
+
+<footer><div class="wrap"><span>2026 Magdalena Malinger</span><a href="#top" data-en="Back to top">Wróć na górę</a></div></footer>
+
+<script>
+// ---- PL / EN ----
+const T=[...document.querySelectorAll("[data-en]")];
+T.forEach(e=>e.dataset.pl=e.innerHTML);
+function setLang(l){
+  T.forEach(e=>e.innerHTML=l==="en"?e.dataset.en:e.dataset.pl);
+  document.documentElement.lang=l;
+  document.querySelectorAll(".lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===l));
+  try{localStorage.setItem("lang",l)}catch(e){}
+}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.l));
+try{if(localStorage.getItem("lang")==="en")setLang("en")}catch(e){}
+
+// ---- aktywna sekcja w menu ----
+const links=[...document.querySelectorAll("nav a")].filter(a=>document.querySelector(a.getAttribute("href")));
+const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+addEventListener("scroll",()=>{
+  let cur=-1;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<innerHeight*.35)cur=i});
+  links.forEach((a,i)=>a.classList.toggle("on",i===cur));
+},{passive:true});
+
+// ---- slider ----
+const tr=document.getElementById("track");
+document.querySelectorAll(".arrows button").forEach(b=>b.onclick=()=>tr.scrollBy({left:b.dataset.d*tr.clientWidth*.6,behavior:"smooth"}));
+
+// ---- siatka kropek reagująca na kursor (hero) ----
+(()=>{
+  const c=document.getElementById("dots"),x=c.getContext("2d"),hero=c.parentElement;
+  const still=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  const S=30;let w,h,dpr,m={x:-999,y:-999},vis=true;
+  function size(){dpr=devicePixelRatio||1;w=c.clientWidth;h=c.clientHeight;c.width=w*dpr;c.height=h*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  function draw(t){
+    x.clearRect(0,0,w,h);
+    for(let i=S/2;i<w;i+=S)for(let j=S/2;j<h;j+=S){
+      const d=Math.hypot(i-m.x,j-m.y),k=Math.max(0,1-d/170);
+      const wave=still?0:Math.sin(t/1100+(i*.012)+(j*.018))*.5;
+      x.beginPath();x.arc(i,j,1.5+wave*.6+k*4.5,0,6.283);
+      x.fillStyle=`rgba(27,138,75,${.28+k*.6+wave*.08})`;x.fill();
+    }
+    if(!still&&vis)requestAnimationFrame(draw);
+  }
+  hero.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect();m.x=e.clientX-r.left;m.y=e.clientY-r.top;if(still)draw(0)});
+  hero.addEventListener("pointerleave",()=>{m.x=m.y=-999;if(still)draw(0)});
+  new IntersectionObserver(e=>{const v=e[0].isIntersecting;if(v&&!vis){vis=true;requestAnimationFrame(draw)}vis=v}).observe(hero);
+  addEventListener("resize",()=>{size();if(still)draw(0)});
+  size();requestAnimationFrame(draw);
+})();
+</script>
+</body>
+</html>
