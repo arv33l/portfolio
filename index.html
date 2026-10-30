@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Magdalena Malinger – protfolio</title>
-<meta name="description" content="Portfolio: aplikacje mobilne, C#, C++, Godot, SQL, animacje i strony internetowe.">
+<meta name="description" content="Magdalena Malinger - portfolio">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wdth,wght@75..100,400..700&display=swap" rel="stylesheet">
@@ -73,7 +73,7 @@ h2{font-size:clamp(1.9rem,3.6vw,2.8rem);letter-spacing:-.03em;line-height:1.1;fo
 .skills li span{color:var(--mute);font-size:.9rem}
 
 /* ---------- projekty: karty nakładają się przy przewijaniu ---------- */
-.stack{display:grid;gap:36px;padding-bottom:30px}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:36px;padding-bottom:30px}
 .pcard{position:sticky;top:calc(88px + var(--i)*16px);display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center;
   padding:30px;border-radius:24px;background:var(--tint);border:1px solid var(--line);min-height:420px}
 .pcard:nth-child(3n+2){background:var(--card)}
@@ -135,11 +135,13 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
   header .wrap{flex-wrap:wrap;height:auto;gap:4px 16px;padding:10px 0}
   nav{order:3;width:100%;overflow-x:auto;gap:18px;padding-bottom:4px;white-space:nowrap}
   .hero{min-height:auto}.hero .wrap{padding:50px 0 190px}
-  .about,.skills,.hobby,.edu,.pcard{grid-template-columns:1fr}
+  .about,.skills,.hobby,.edu,.pcard{grid-template-columns:minmax(0,1fr)}
   .about,.skills,.hobby,.edu{gap:34px}
   .pcard{position:static;gap:24px;padding:20px;min-height:0}
   .edu li{grid-template-columns:90px 1fr}
   html{scroll-padding-top:110px}
+  .shots{min-height:0;gap:12px}
+  .shot{height:auto;max-height:330px;flex:1 1 0;min-width:0}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
